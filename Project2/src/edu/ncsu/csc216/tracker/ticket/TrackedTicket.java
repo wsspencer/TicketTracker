@@ -105,9 +105,8 @@ public class TrackedTicket {
 	 * This is the constructor method for this class when the other two parameters are not passed to it
 	 * @param title String representation of the ticket's title
 	 */
-	public TrackedTicket(String title) {
+	public TrackedTicket(Ticket ticket) {
 		//TO DO: Implementation
-		new TrackedTicket(title, null, null);
 	}
 	
 	/**
