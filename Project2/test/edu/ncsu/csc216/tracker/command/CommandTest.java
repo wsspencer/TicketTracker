@@ -1,10 +1,14 @@
 package edu.ncsu.csc216.tracker.command;
 
-/**
- * This is a test method for testing the command functionality
- * @author Scott Spencer
- *
- */
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 public class CommandTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
 
 }

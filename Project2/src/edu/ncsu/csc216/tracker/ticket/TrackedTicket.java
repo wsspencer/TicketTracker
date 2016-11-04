@@ -103,10 +103,10 @@ public class TrackedTicket {
 	
 	/**
 	 * This is the constructor method for this class when the other two parameters are not passed to it
-	 * @param title String representation of the ticket's title
+	 * @param ticket Ticket representation of the ticket
 	 */
 	public TrackedTicket(Ticket ticket) {
-		//TO DO: Implementation
+		new TrackedTicket(ticket.getTitle(), ticket.getSubmitter(), ticket.getOwner());
 	}
 	
 	/**

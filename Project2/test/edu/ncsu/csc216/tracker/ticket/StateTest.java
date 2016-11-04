@@ -15,10 +15,17 @@ public class StateTest {
 	@Test
 	public void testTrackedTicket() {
 		TrackedTicket tt = new TrackedTicket("title", "Me", "Myself");
-		
+		tt.setCounter(1);
 		assertEquals(1, tt.getTicketId());
 		tt.incrementCounter();
 		assertEquals(2, tt.getTicketId());
+		
+		try {
+			tt.setCounter(0);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(tt.getTicketId(), 2);
+		}
 	}
 		
 }
