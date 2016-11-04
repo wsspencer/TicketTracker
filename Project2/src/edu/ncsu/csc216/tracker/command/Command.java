@@ -98,7 +98,7 @@ public class Command {
 		this.noteAuthor = noteAuthor;
 		this.noteText = noteText;
 	}
-	
+	 
 	/**
 	 * This is a getter method for returning the command value of the command
 	 * @return CommandValue, the value of the command

@@ -12,7 +12,7 @@ import edu.ncsu.csc216.tracker.command.Command;
  *
  */
 public class StateTest { 
-	/**
+	/** 
 	 * Method to test the tracked ticket functionality
 	 */
 	@Test

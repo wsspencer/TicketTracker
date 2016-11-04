@@ -96,7 +96,7 @@ public class TrackedTicket {
 		//TO DO: Implementation
 		this.submitter = submitter;
 		this.title = title;
-		this.owner = owner;
+		this.owner = owner; 
 		//intialized to 1, when changed its static nature will change it across the class, to make it an ID generator
 		this.setCounter(1);
 		this.ticketId = TrackedTicket.counter;
@@ -115,7 +115,7 @@ public class TrackedTicket {
 	 * This is the voided method used to increment the class' counter
 	 */
 	public static void incrementCounter() {
-		TrackedTicket.counter++;
+		++TrackedTicket.counter;
 	}
 	
 	/**
@@ -146,7 +146,7 @@ public class TrackedTicket {
 		//IF a New ticket, 
 		if (this.getStateName().equals(this.NEW_NAME)) {
 			if (stateValue.equals(this.ASSIGNED_NAME)) {
-
+				
 			}
 		}
 	}

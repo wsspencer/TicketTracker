@@ -105,7 +105,7 @@ public class TicketTrackerModel {
 		if (submitter == null) {
 			throw new IllegalArgumentException();
 		}
-		return null;
+		return null; 
 	}
 	
 	/**
