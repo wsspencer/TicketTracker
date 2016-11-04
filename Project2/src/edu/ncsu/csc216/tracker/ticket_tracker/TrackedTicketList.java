@@ -47,8 +47,8 @@ public class TrackedTicketList {
 	 * This is the method used for adding tickets to the XML file
 	 * @param ticketList this is the List of abstract object type ticket(s)
 	 */
-	public void addXMLTikets(ArrayList<Ticket> ticketList) {
-		//TO DO: Implementation
+	public void addXMLTickets(ArrayList<Ticket> ticketList) {
+		
 	}
 	
 	/**
