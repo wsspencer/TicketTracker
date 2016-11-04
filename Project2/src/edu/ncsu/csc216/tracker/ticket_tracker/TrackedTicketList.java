@@ -55,7 +55,7 @@ public class TrackedTicketList {
 	 * This is the method used to return this instance's list of abstract object type: TrackedTicket(s)
 	 * @return this instance's List of abstract object type: TrackedTicket(s)
 	 */
-	public List getTrackedTickets() {
+	public ArrayList<TrackedTicket> getTrackedTickets() {
 		//TO DO: Implementation
 		return null;
 	}
