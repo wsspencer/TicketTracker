@@ -6,6 +6,29 @@ package edu.ncsu.csc216.tracker.command;
  *
  */
 public class Command {
+	/**
+	 * This is a class meant to outline the characteristics and behaviors of CommandValue
+	 * @author Scott Spencer
+	 *
+	 */
+	public static enum CommandValue { 
+		POSSESSION,
+		ACCEPTED, 
+		CLOSED, 
+		PROGRESS, 
+		FEEDBACK 
+	}
+	
+	/**
+	 * This is an enumeration outlining the possibilities of a Flag (accessed as such: "Flag.DUPLICATE")
+	 * @author Scott Spencer
+	 *
+	 */
+	public static enum Flag { 
+		DUPLICATE, 
+		INAPPROPRIATE, 
+		RESOLVED 
+	}	
 	
 	//Instances, enums accessed e.g. "CommandValue.CLOSED"
 	/**

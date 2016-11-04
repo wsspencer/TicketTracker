@@ -1,7 +1,9 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
 import java.awt.List;
+import java.util.ArrayList;
 
+import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.tracker.command.Command;
 import edu.ncsu.csc216.tracker.ticket.TrackedTicket;
 
@@ -45,7 +47,7 @@ public class TrackedTicketList {
 	 * This is the method used for adding tickets to the XML file
 	 * @param ticketList this is the List of abstract object type ticket(s)
 	 */
-	public void addXMLTikets(List<Ticket> ticketList) {
+	public void addXMLTikets(ArrayList<Ticket> ticketList) {
 		//TO DO: Implementation
 	}
 	
@@ -53,7 +55,7 @@ public class TrackedTicketList {
 	 * This is the method used to return this instance's list of abstract object type: TrackedTicket(s)
 	 * @return this instance's List of abstract object type: TrackedTicket(s)
 	 */
-	public List<TrackedTicket> getTrackedTickets() {
+	public ArrayList<TrackedTicket> getTrackedTickets() {
 		//TO DO: Implementation
 		return null;
 	}
@@ -62,7 +64,7 @@ public class TrackedTicketList {
 	 * This is a method used to return this instance's tickets by a specific submitter
 	 * @return this instance's List by submitter of abstract object type: TracketTicket(s)
 	 */
-	public List<TrackedTicket> getTicketsBySubmitter(String submitter) {
+	public ArrayList<TrackedTicket> getTicketsBySubmitter(String submitter) {
 		//TO DO: Implementation
 		return null;
 	}
@@ -71,7 +73,7 @@ public class TrackedTicketList {
 	 * This is the method used to return this instance's list of tickets by a specific owner.
 	 * @return this instance's List by owner of abstract object type: TrackedTicket(s)
 	 */
-	public List<TrackedTicket> getTicketsByOwner(String owner) {
+	public ArrayList<TrackedTicket> getTicketsByOwner(String owner) {
 		//TO DO: Implementation
 		return null;
 	}

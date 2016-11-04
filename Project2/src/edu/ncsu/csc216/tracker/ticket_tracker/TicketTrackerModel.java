@@ -43,8 +43,9 @@ public class TicketTrackerModel {
 	
 	/**
 	 * This is a voided method for saving the current tickets to a file.
+	 * @param fileName the string of the filepath
 	 */
-	public void saveTicketsToFile() {
+	public void saveTicketsToFile(String fileName) {
 		//TO DO: Implementation
 	}
 	
