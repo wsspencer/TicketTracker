@@ -17,7 +17,7 @@ public class CommandTest {
 		}
 		//check that null author throws exception
 		try {
-			Command com2 = new Command(Command.CommandValue.ACCEPTED, "me", Command.Flag.DUPLICATE,
+			Command com2 = new Command(Command.CommandValue.FEEDBACK, "me", Command.Flag.INAPPROPRIATE,
 					null, "boop");
 			fail();
 		} catch (IllegalArgumentException e) {
@@ -25,7 +25,7 @@ public class CommandTest {
 		}
 		//check that null notetext throws exception
 		try {
-			Command com3 = new Command(Command.CommandValue.ACCEPTED, "me", Command.Flag.DUPLICATE,
+			Command com3 = new Command(Command.CommandValue.ACCEPTED, "me", Command.Flag.RESOLVED,
 					"me", null);
 			fail();
 		} catch (IllegalArgumentException e) {
@@ -62,6 +62,9 @@ public class CommandTest {
 		assertEquals(Command.Flag.RESOLVED, com7.getFlag());
 		assertEquals("me", com7.getNoteAuthor());
 		assertEquals("boop", com7.getNoteText());
+		
+		assertEquals(Command.Flag.RESOLVED, com7.getFlag());
+		assertEquals(Command.CommandValue.ACCEPTED, com7.getCommand());
 	}
 	
 	@Test
