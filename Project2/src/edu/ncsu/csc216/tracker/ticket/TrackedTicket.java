@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.tracker.command.Command;
+import edu.ncsu.csc216.tracker.command.Command.CommandValue;
 
 /**
  * TrackedTicket is a class which maintains all of the history of the progression of the TrackedTicket through the 
@@ -217,9 +218,9 @@ public class TrackedTicket {
 	
 	/**
 	 * This is the method used to update the ticket after receiving a command from the UI.
-	 * @param command this is the command passed from the GUI
+	 * @param possession this is the command passed from the GUI
 	 */
-	public void update(Command command) {
+	public void update(Command possession) {
 		//TO DO: Implementation
 	}
 	

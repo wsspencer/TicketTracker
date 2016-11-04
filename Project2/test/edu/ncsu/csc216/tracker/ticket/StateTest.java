@@ -5,12 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import edu.ncsu.csc216.ticket.xml.Ticket;
+import edu.ncsu.csc216.tracker.command.Command;
 /**
  * This is a class meant to test the ticket state functionality
  * @author Scott Spencer
  *
  */
-public class StateTest {
+public class StateTest { 
 	/**
 	 * Method to test the tracked ticket functionality
 	 */
@@ -43,5 +44,27 @@ public class StateTest {
 		assertEquals("Me", t.getSubmitter());
 		assertEquals("Myself", t.getOwner());
 		assertEquals("title", t.getTitle());
+		
+		//To be added for later tests
+		tt1.setCounter(2);
+		tt1.getFlag();
+		tt1.getXMLTicket();
+		tt1.getNotes();
+		tt1.getNotesArray();
+		tt1.getTicketId();
+		tt1.getStateName();
+		tt1.getFlagString();
+		tt2.incrementCounter();
+		//tt1.update(Command);
+		
+		
+		Note note1 = new Note("beep", "boop");
+		Note note2 = new Note("boop", "beep");
+		note1.equals(note2);
+		note1.getNoteArray();
+		assertEquals("beep", note1.getNoteAuthor());
+		assertEquals("boop", note1.getNoteText());
+		note1.hashCode();
+		
 	}
 }

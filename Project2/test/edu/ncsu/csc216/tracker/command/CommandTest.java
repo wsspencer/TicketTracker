@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class CommandTest {
+public class CommandTest { 
 
 	@Test
 	public void testCommandConstruction() {
