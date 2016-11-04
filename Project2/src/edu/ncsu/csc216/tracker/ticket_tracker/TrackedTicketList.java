@@ -1,8 +1,9 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 
+import edu.ncsu.csc216.ticket.*;
 import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.tracker.command.Command;
 import edu.ncsu.csc216.tracker.ticket.TrackedTicket;
@@ -29,6 +30,7 @@ public class TrackedTicketList {
 	 */
 	public TrackedTicketList() {
 		//TO DO: Implementation
+		
 	}
 	
 	/**
@@ -47,7 +49,7 @@ public class TrackedTicketList {
 	 * This is the method used for adding tickets to the XML file
 	 * @param ticketList this is the List of abstract object type ticket(s)
 	 */
-	public void addXMLTickets(ArrayList<Ticket> ticketList) {
+	public void addXMLTickets(List<Ticket> ticketList) {
 		
 	}
 	

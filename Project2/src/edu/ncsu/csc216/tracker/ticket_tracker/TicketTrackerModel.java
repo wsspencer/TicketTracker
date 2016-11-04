@@ -81,6 +81,9 @@ public class TicketTrackerModel {
 	 */
 	public Object[][] getTicketListByOwnerAsArray(String owner) { 
 		//TO DO: Implementation
+		if (owner == null) {
+			throw new IllegalArgumentException();
+		}
 		return null;
 	}
 	
@@ -92,6 +95,9 @@ public class TicketTrackerModel {
 	 */
 	public Object[][] getTicketListBySubmitterAsArray(String submitter) {
 		//TO DO: Implementation
+		if (submitter == null) {
+			throw new IllegalArgumentException();
+		}
 		return null;
 	}
 	
