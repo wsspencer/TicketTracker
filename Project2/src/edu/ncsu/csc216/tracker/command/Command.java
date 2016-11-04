@@ -7,14 +7,14 @@ package edu.ncsu.csc216.tracker.command;
  */
 public class Command {
 	
-	//Instances
+	//Instances, enums accessed e.g. "CommandValue.CLOSED"
 	/**
-	 * This is an instance of a flag that this command will reference (passed to Flag)
+	 * This is an instance of a flag ENUMERATION that this command will reference (passed to Flag)
 	 */
 	private Flag flag;
 	
 	/**
-	 * This is an instance of a command value that this command will reference (passed to CommandValue)
+	 * This is an instance of a command value ENUMERATION that this command will reference (passed to CommandValue)
 	 */
 	private CommandValue comVal;
 
@@ -41,7 +41,7 @@ public class Command {
 	/**
 	 * This is an instance variable for the note
 	 */
-	private String note;
+	private String noteText;
 	
 	/**
 	 * This is an instance variable for the author of the note
@@ -56,8 +56,24 @@ public class Command {
 	 * @param note the current ticket's notes 
 	 * @param noteAuthor the current ticket's note's author
 	 */
-	public Command(CommandValue value, String owner, Flag flag, String note, String noteAuthor) {
-		//TO DO: Implementation
+	public Command(CommandValue c, String owner, Flag flag, String noteAuthor, String noteText) {
+		if (c == null || noteAuthor == null || noteText == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		if (c == CommandValue.POSSESSION && owner == null || owner.isEmpty()) {
+			throw new IllegalArgumentException();
+		}
+		
+		if (c == CommandValue.CLOSED && flag == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		this.comVal = c;
+		this.owner = owner;
+		this.flag = flag;
+		this.noteAuthor = noteAuthor;
+		this.noteText = noteText;
 	}
 	
 	/**
@@ -65,8 +81,7 @@ public class Command {
 	 * @return CommandValue, the value of the command
 	 */
 	public CommandValue getCommand() {
-		//TO DO: Implementation
-		return null;
+		return this.comVal;
 	}
 	
 	/**
@@ -74,8 +89,7 @@ public class Command {
 	 * @return String the name of the owner
 	 */
 	public String getOwner() {
-		//TO DO: Implementation
-		return null;
+		return this.owner;
 	}
 	
 	/**
@@ -83,8 +97,7 @@ public class Command {
 	 * @return Flag the flag we are working with
 	 */
 	public Flag getFlag() {
-		//TO DO: Implementation
-		return null;
+		return this.flag;
 	}
 	
 	/**
@@ -92,8 +105,7 @@ public class Command {
 	 * @return String the text of the note
 	 */
 	public String getNoteText() {
-		//TO DO: Implementation
-		return null;
+		return this.noteText;
 	}
 	
 	/**
@@ -101,7 +113,6 @@ public class Command {
 	 * @return String of the author's name
 	 */
 	public String getNoteAuthor() {
-		//TO DO: Implementation
-		return null;
+		return this.noteAuthor;
 	}
 }
