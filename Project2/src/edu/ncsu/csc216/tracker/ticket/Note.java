@@ -23,7 +23,12 @@ public class Note {
 	 * @param text the text instide of a note
 	 */
 	public Note(String author, String text) {
-		//TO DO: Implementation
+		if (author == null || text == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		this.setNoteAuthor(author);
+		this.setNoteText(text);
 	}
 	
 	/**
@@ -31,8 +36,7 @@ public class Note {
 	 * @return String the author of the note
 	 */
 	public String getNoteAuthor() {
-		//TO DO: Implementation
-		return null;
+		return this.noteAuthor;
 	}
 	
 	/**
@@ -40,7 +44,7 @@ public class Note {
 	 * @param author the String for the author's name 
 	 */
 	private void setNoteAuthor(String author) {
-		//TO DO: Implementation
+		this.noteAuthor = author;
 	}
 	
 	/**
@@ -48,8 +52,7 @@ public class Note {
 	 * @return String the string representation of the note's text
 	 */
 	public String getNoteText() {
-		//TO DO: Implementation
-		return null;
+		return this.noteText;
 	}
 	
 	/**
@@ -57,15 +60,18 @@ public class Note {
 	 * @param text the String representation of the note's text
 	 */
 	private void setNoteText(String text) {
-		//TO DO: Implementation
+		this.noteText = text;
 	}
 	
 	/**
-	 * Ths is the getter method for returning an array of Strings representing the notes 
-	 * @return String[] an array of notes (String form)
+	 * Ths is the getter method for returning an array of 2 Strings representing the note author at index 0 and text 
+	 * at index 1.
+	 * @return String[] an array of notetext + author
 	 */
 	public String[] getNoteArray() {
-		//TO DO: Implementation
-		return null;
+		String[] noteArr = new String[2];
+		noteArr[0] = this.noteAuthor;
+		noteArr[1] = this.noteText;
+		return noteArr;
 	}
 }

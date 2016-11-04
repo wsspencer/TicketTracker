@@ -2,6 +2,7 @@ package edu.ncsu.csc216.tracker.ticket;
 
 import java.util.ArrayList;
 
+import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.tracker.command.Command;
 import edu.ncsu.csc216.tracker.command.Flag;
 
