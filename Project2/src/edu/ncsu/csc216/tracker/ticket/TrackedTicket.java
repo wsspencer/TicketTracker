@@ -82,7 +82,7 @@ public class TrackedTicket {
 	 * This is an instance variable for the counter.  It is static so when it is incremented, that instance is shared
 	 * by all counter instances in this class, making it a good ID generator.
 	 */
-	private static int counter = 1;
+	private static int counter;
 	
 	
 	/**
@@ -97,7 +97,8 @@ public class TrackedTicket {
 		this.title = title;
 		this.owner = owner;
 		//intialized to 1, when changed its static nature will change it across the class, to make it an ID generator
-		TrackedTicket.counter = this.ticketId;
+		this.setCounter(1);
+		this.ticketId = TrackedTicket.counter;
 		TrackedTicket.incrementCounter();
 	}
 	

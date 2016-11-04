@@ -1,5 +1,10 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
+import edu.ncsu.csc216.ticket.xml.Ticket;
+import edu.ncsu.csc216.ticket.xml.TicketWriter;
 import edu.ncsu.csc216.tracker.command.Command;
 import edu.ncsu.csc216.tracker.ticket.TrackedTicket;
 
@@ -16,7 +21,7 @@ public class TicketTrackerModel {
 	/**
 	 * This is an instance of TicketTrackerModel (passed to itself)
 	 */
-	private TicketTrackerModel singleton;
+	private static TicketTrackerModel singleton;
 	
 	/**
 	 * This is an instance of TicketTrackerModel (passed to TrackedTicketList)
@@ -37,8 +42,7 @@ public class TicketTrackerModel {
 	 * @return TicketTrackerModel the instance of this class.
 	 */
 	public static TicketTrackerModel getInstance() {
-		//TO DO: Implementation
-		return null;
+		return TicketTrackerModel.singleton;
 	}
 	
 	/**
@@ -46,8 +50,11 @@ public class TicketTrackerModel {
 	 * @param fileName the string of the filepath
 	 */
 	public void saveTicketsToFile(String fileName) {
-		//TO DO: Implementation
-	}
+			TicketWriter tWrite = new TicketWriter(fileName);
+			for (int i = 1; i <= this.getTicketListAsArray().length; i++) {
+				//tWrite.addItem(some ticket...from array?);
+			}
+	} 
 	
 	/**
 	 * This is a voided method for loading a file from the parameterized filename.
