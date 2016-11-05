@@ -1,9 +1,12 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
+import java.util.List;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import edu.ncsu.csc216.ticket.xml.Ticket;
+import edu.ncsu.csc216.ticket.xml.TicketIOException;
+import edu.ncsu.csc216.ticket.xml.TicketReader;
 import edu.ncsu.csc216.ticket.xml.TicketWriter;
 import edu.ncsu.csc216.tracker.command.Command;
 import edu.ncsu.csc216.tracker.ticket.TrackedTicket;
@@ -25,15 +28,22 @@ public class TicketTrackerModel {
 	
 	/**
 	 * This is an instance of TicketTrackerModel (passed to TrackedTicketList)
+	 */ 
+	private TrackedTicketList trackedTicketList;
+	
+	/**
+	 * This is a deviation from the UML.  It is a helper variable to store the list of Tickets
+	 * read from the XML file.
 	 */
-	private TicketTrackerModel trackedTicketList;
+	private List<Ticket> listXML;
 	
 	/**
 	 * This is the constructor method for TicketTrackerModel, which is private so that it cannot be called by any
 	 * other method, we do not want the program instantiating this class anywhere but from the getInstance() method
 	 */
 	private TicketTrackerModel() {
-		//TO DO: Implementation
+		this.trackedTicketList = new TrackedTicketList();
+		this.singleton = new TicketTrackerModel();
 	}
 	
 	/**
@@ -51,8 +61,10 @@ public class TicketTrackerModel {
 	 */
 	public void saveTicketsToFile(String fileName) {
 			TicketWriter tWrite = new TicketWriter(fileName);
-			for (int i = 1; i <= this.getTicketListAsArray().length; i++) {
-				//tWrite.addItem(some ticket...from array?);
+			try {
+				tWrite.marshal();
+			} catch (TicketIOException e) {
+				throw new IllegalArgumentException();
 			}
 	} 
 	
@@ -61,7 +73,14 @@ public class TicketTrackerModel {
 	 * @param filename a String representation of the filepath the file is located.
 	 */
 	public void loadTicketsFromFile(String filename) {
-		//TO DO: Implementation
+		TicketReader tRead;
+		try {
+			tRead = new TicketReader(filename);
+		} catch (TicketIOException e) {
+			throw new IllegalArgumentException();
+		}
+		this.listXML = tRead.getTickets();
+		
 	}
 	
 	/**
@@ -73,11 +92,19 @@ public class TicketTrackerModel {
 	
 	/**
 	 * This is the method used to return a 2-dimensional array of Ticket objects, which we use to store our ticket list
+	 * INDEXED AS:  [0] idNumber, [1] state name, [2] title
+	 * (may need to build it from the IO input file
 	 * @return
-	 */
+	 */ 
 	public Object[][] getTicketListAsArray() {
-		//TO DO: Implementation
-		return null;
+		Object[][] temp = new String[listXML.size()][3];
+		//builds array of arrays
+		for (int i = 0; i < listXML.size(); i++) {
+			temp[i][0] = listXML.get(i).getId(); //Integer array of IDs
+			temp[i][1] = listXML.get(i).getState(); //String array of state names
+			temp[i][2] = listXML.get(i).getTitle(); //String array of titles
+		}
+		return temp;
 	}
 	
 	/**
@@ -132,7 +159,7 @@ public class TicketTrackerModel {
 	 * @param idNumber the integer used to identify specific tickets
 	 */
 	public void deleteTicketById(int idNumber) {
-		
+
 	}
 	
 	/**
@@ -142,6 +169,6 @@ public class TicketTrackerModel {
 	 * @param owner the name of the owner
 	 */
 	public void addTicketToList(String title, String submitter, String owner) {
-		
+		this.trackedTicketList.addTrackedTicket(title, submitter, owner);
 	}
 }

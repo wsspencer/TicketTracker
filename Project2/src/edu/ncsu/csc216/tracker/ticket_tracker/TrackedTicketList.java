@@ -117,12 +117,14 @@ public class TrackedTicketList {
 	 */
 	public TrackedTicket getTicketById(int idNumber) {
 		//run loop until you find the index (i) where the ID number is found in the array of tickets
-		for (int i = 0; i < this.trackedTicketList.getTicketListAsArray().length; i++) {
-			this.trackedTicketList.getTicketListAsArray()[i][3] == idNumber;
-			return 	this.trackedTicketList.getTicketListAsArray()[i][]; 
+		for (int i = 0; i < this.getTrackedTickets().size(); i++) {
+			//cast to integer since the array was build as a multi-dimensional object array 
+			//(done because array is made of an int and 2 strings
+			if ((Integer) this.trackedTicketList.getTicketListAsArray()[i][0] == idNumber) {
+				return this.getTrackedTickets().get(i);
+			}
 		}
 		return null;
-		
 	}
 	
 	/**
