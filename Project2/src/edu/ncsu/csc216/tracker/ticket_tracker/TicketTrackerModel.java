@@ -43,7 +43,6 @@ public class TicketTrackerModel {
 	 */
 	private TicketTrackerModel() {
 		this.trackedTicketList = new TrackedTicketList();
-		this.singleton = new TicketTrackerModel();
 	}
 	
 	/**
