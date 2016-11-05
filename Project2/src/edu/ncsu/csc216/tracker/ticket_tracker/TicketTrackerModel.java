@@ -36,7 +36,7 @@ public class TicketTrackerModel {
 	 * read from the XML file.
 	 */
 	private List<Ticket> listXML;
-	
+	  
 	/**
 	 * This is the constructor method for TicketTrackerModel, which is private so that it cannot be called by any
 	 * other method, we do not want the program instantiating this class anywhere but from the getInstance() method
