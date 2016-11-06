@@ -93,7 +93,7 @@ public class TicketTrackerModel {
 	 * This is the method used to return a 2-dimensional array of Ticket objects, which we use to store our ticket list
 	 * INDEXED AS:  [0] idNumber, [1] state name, [2] title
 	 * (may need to build it from the IO input file
-	 * @return
+	 * @return Object[][] a 2-dimensional array for any Object (will need to be casted)
 	 */ 
 	public Object[][] getTicketListAsArray() {
 		Object[][] temp = new String[listXML.size()][3];
@@ -141,7 +141,7 @@ public class TicketTrackerModel {
 	 */
 	public TrackedTicket getTicketById(int idNumber) {
 		//TO DO: Implementation
-		return null;
+		return this.trackedTicketList.getTicketById(idNumber);
 	}
 	
 	/**
@@ -158,7 +158,7 @@ public class TicketTrackerModel {
 	 * @param idNumber the integer used to identify specific tickets
 	 */
 	public void deleteTicketById(int idNumber) {
-
+		this.listXML.remove(idNumber);
 	}
 	
 	/**

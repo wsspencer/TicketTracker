@@ -11,7 +11,7 @@ public class Command {
 	 * @author Scott Spencer
 	 *
 	 */
-	public static enum CommandValue { 
+	public static enum CommandValue {  
 		POSSESSION,
 		ACCEPTED, 
 		CLOSED, 
@@ -73,11 +73,11 @@ public class Command {
 	
 	/**
 	 * This is a constructor method for building a command
-	 * @param value the value of the command
+	 * @param c the value of the command
 	 * @param owner the current ticket's owner
 	 * @param flag the current ticket's flag
-	 * @param note the current ticket's notes 
-	 * @param noteAuthor the current ticket's note's author
+	 * @param noteAuthor the current ticket's notes 
+	 * @param noteText the current ticket's note's author
 	 */
 	public Command(CommandValue c, String owner, Flag flag, String noteAuthor, String noteText) {
 		if (c == null || noteAuthor == null || noteText == null) {

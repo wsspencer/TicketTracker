@@ -25,7 +25,7 @@ public class Note {
 	public Note(String author, String text) {
 		if (author == null || text == null) {
 			throw new IllegalArgumentException();
-		}
+		} 
 		
 		this.setNoteAuthor(author);
 		this.setNoteText(text);

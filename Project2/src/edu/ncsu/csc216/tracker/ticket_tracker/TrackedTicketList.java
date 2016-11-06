@@ -34,7 +34,6 @@ public class TrackedTicketList {
 	 * This is the constructor method to create and set initial values of the TrackedTicketList
 	 */
 	public TrackedTicketList() {  
-		this.trackedTicketList.getTicketListAsArray();
 		TrackedTicket.setCounter(INITIAL_COUNTER_VALUE);
 	}
 	
@@ -89,6 +88,7 @@ public class TrackedTicketList {
 	/**
 	 * This is a method used to return this instance's tickets by a specific submitter
 	 * @return this instance's List by submitter of abstract object type: TracketTicket(s)
+	 * @param submitter the first person to write the first note of a ticket
 	 */
 	public ArrayList<TrackedTicket> getTicketsBySubmitter(String submitter) {
 		ArrayList<TrackedTicket> tickBySub = new ArrayList<TrackedTicket>();
@@ -101,6 +101,7 @@ public class TrackedTicketList {
 	/**
 	 * This is the method used to return this instance's list of tickets by a specific owner.
 	 * @return this instance's List by owner of abstract object type: TrackedTicket(s)
+	 * @param owner the name of the person the ticket is assigned to
 	 */
 	public ArrayList<TrackedTicket> getTicketsByOwner(String owner) {
 		ArrayList<TrackedTicket> tickByOwn = new ArrayList<TrackedTicket>();

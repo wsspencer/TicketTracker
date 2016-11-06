@@ -109,6 +109,9 @@ public class TrackedTicket {
 	 */
 	public TrackedTicket(Ticket ticket) {
 		new TrackedTicket(ticket.getTitle(), ticket.getSubmitter(), ticket.getOwner());
+		this.title = ticket.getTitle();
+		this.submitter = ticket.getSubmitter();
+		this.owner = ticket.getOwner();
 	}
 	
 	/**
@@ -128,7 +131,7 @@ public class TrackedTicket {
 	
 	/**
 	 * This is the method used to return the String of the "state name" (for determining state) of the ticket
-	 * @return 
+	 * @return String the name (string representation) of the name of the state the ticket is in
 	 */
 	public String getStateName() {
 		return this.state.getStateName();
@@ -139,14 +142,57 @@ public class TrackedTicket {
 	 * @param stateValue the name of the state we are going to set the ticket to
 	 */
 	private void setState(String stateValue) {
-		//TO DO: if parameter is INCORRECT, throw illegalargumentexception
+		//IF parameter is INCORRECT, throw illegalargumentexception
 		if (stateValue == null) {
 			throw new IllegalArgumentException();
 		}
 		//IF a New ticket, 
-		if (this.getStateName().equals(this.NEW_NAME)) {
-			if (stateValue.equals(this.ASSIGNED_NAME)) {
-				
+		if (this.getStateName().equals(TrackedTicket.NEW_NAME)) {
+			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
+				//set state to assigned
+			}
+		}
+		
+		//IF an Assigned ticket,
+		if (this.getStateName().equals(TrackedTicket.ASSIGNED_NAME)) {
+			if (stateValue.equals(TrackedTicket.CLOSED_NAME)) {
+				//set state to closed
+			}
+			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
+				//set state to working
+			}
+		}
+		
+		//IF a Closed ticket,
+		if (this.getStateName().equals(TrackedTicket.CLOSED_NAME)) {
+			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
+				//set state to assigned
+			}
+			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
+				//set state to working
+			}
+		}
+		
+		//IF a Working ticket,
+		if (this.getStateName().equals(TrackedTicket.WORKING_NAME)) {
+			if (stateValue.equals(TrackedTicket.FEEDBACK_NAME)) {
+				//set state to feedback
+			}
+			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
+				//set state to working
+			}
+			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
+				//set state to assigned
+			}
+			if (stateValue.equals(TrackedTicket.CLOSED_NAME)) {
+				//set state to closed 
+			}
+		}
+		
+		// IF a Feedback ticket,
+		if (this.getStateName().equals(TrackedTicket.FEEDBACK_NAME)) {
+			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
+				//set state to working
 			}
 		}
 	}
@@ -209,7 +255,7 @@ public class TrackedTicket {
 	
 	/**
 	 * This is the method used to return the notes associated with this ticket
-	 * @return ArrayList<Note>  this is the array list of notes associated with this ticket
+	 * @return ArrayList this is the array list of notes associated with this ticket (Note parameter)
 	 */
 	public ArrayList<Note> getNotes() {
 		//no idea what this is suppose to do...
@@ -229,8 +275,16 @@ public class TrackedTicket {
 	 * @return Ticket the instance of this ticket
 	 */
 	public Ticket getXMLTicket() {
-		//TO DO: Implementation
-		return null;
+		//TO DO: figure out where NoteList comes into play
+		Ticket xmlTick = new Ticket();
+		xmlTick.setId(this.ticketId);
+		xmlTick.setState(this.state.getStateName());
+		xmlTick.setTitle(this.title);
+		xmlTick.setSubmitter(this.submitter);
+		xmlTick.setOwner(this.owner);
+		xmlTick.setFlag(this.flag.name());
+		//xmlTick.setNoteList(this.notes);
+		return xmlTick;
 	}
 	
 	/**
