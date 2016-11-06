@@ -98,7 +98,7 @@ public class TrackedTicket {
 		this.title = title;
 		this.owner = owner; 
 		//intialized to 1, when changed its static nature will change it across the class, to make it an ID generator
-		this.setCounter(1);
+		TrackedTicket.setCounter(1);
 		this.ticketId = TrackedTicket.counter;
 		TrackedTicket.incrementCounter();
 	}
@@ -112,6 +112,7 @@ public class TrackedTicket {
 		this.title = ticket.getTitle();
 		this.submitter = ticket.getSubmitter();
 		this.owner = ticket.getOwner();
+		this.setFlag(ticket.getFlag());
 	}
 	
 	/**
@@ -150,6 +151,7 @@ public class TrackedTicket {
 		if (this.getStateName().equals(TrackedTicket.NEW_NAME)) {
 			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
 				//set state to assigned
+				this.state = new AssignedState();
 			}
 		}
 		
@@ -157,9 +159,11 @@ public class TrackedTicket {
 		if (this.getStateName().equals(TrackedTicket.ASSIGNED_NAME)) {
 			if (stateValue.equals(TrackedTicket.CLOSED_NAME)) {
 				//set state to closed
+				this.state = new ClosedState();
 			}
 			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
 				//set state to working
+				this.state = new WorkingState();
 			}
 		}
 		
@@ -167,9 +171,11 @@ public class TrackedTicket {
 		if (this.getStateName().equals(TrackedTicket.CLOSED_NAME)) {
 			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
 				//set state to assigned
+				this.state = new AssignedState();
 			}
 			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
 				//set state to working
+				this.state = new WorkingState();
 			}
 		}
 		
@@ -177,15 +183,19 @@ public class TrackedTicket {
 		if (this.getStateName().equals(TrackedTicket.WORKING_NAME)) {
 			if (stateValue.equals(TrackedTicket.FEEDBACK_NAME)) {
 				//set state to feedback
+				this.state = new FeedbackState();
 			}
 			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
 				//set state to working
+				this.state = new WorkingState();
 			}
 			if (stateValue.equals(TrackedTicket.ASSIGNED_NAME)) {
 				//set state to assigned
+				this.state = new AssignedState();
 			}
 			if (stateValue.equals(TrackedTicket.CLOSED_NAME)) {
 				//set state to closed 
+				this.state = new ClosedState();
 			}
 		}
 		
@@ -193,6 +203,7 @@ public class TrackedTicket {
 		if (this.getStateName().equals(TrackedTicket.FEEDBACK_NAME)) {
 			if (stateValue.equals(TrackedTicket.WORKING_NAME)) {
 				//set state to working
+				this.state = new WorkingState();
 			}
 		}
 	}
@@ -258,16 +269,25 @@ public class TrackedTicket {
 	 * @return ArrayList this is the array list of notes associated with this ticket (Note parameter)
 	 */
 	public ArrayList<Note> getNotes() {
-		//no idea what this is suppose to do...
-		return new ArrayList<Note>();
+		ArrayList<Note> list = new ArrayList<Note>();
+		for (int i = 0; i < this.notes.getNoteArray().length; i++) {
+			//adds note at 2-D index i (since it is an array of strings, we must add a new note with the author and text body which are found
+			//in the y indexes of this array
+			list.add(new Note(this.getNotesArray()[i][0], this.getNotesArray()[i][0]));
+		}
+		return list;
 	}
 	
 	/**
 	 * This is the method used to update the ticket after receiving a command from the UI.
-	 * @param possession this is the command passed from the GUI
+	 * @param command this is the command passed from the GUI
 	 */
-	public void update(Command possession) {
+	public void update(Command command) {
 		//TO DO: Implementation
+		this.flag = command.getFlag();
+		this.notes = new Note(command.getNoteAuthor(), command.getNoteText());
+		this.owner = command.getOwner();
+		//this.state = command.getCommand().;
 	}
 	
 	/**
@@ -318,7 +338,7 @@ public class TrackedTicket {
 		 * This is a constructor method for the assigned state
 		 */
 		private AssignedState() {
-			//TO DO: Implementation
+			//TODO: Implementation
 		}
 		
 		/**
@@ -330,11 +350,13 @@ public class TrackedTicket {
 			if (command.getCommand() == Command.CommandValue.ACCEPTED) {
 				//Valid for the Assigned State
 				//change to working state
+				setState(Command.CommandValue.ACCEPTED.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.CLOSED) {
 				//Valid for the Assigned State
 				//change to closed state
+				setState(Command.CommandValue.CLOSED.name());
 			}
 			
 			if (command.getCommand() == Command. CommandValue.FEEDBACK || 
@@ -376,10 +398,12 @@ public class TrackedTicket {
 		public void updateState(Command command) {
 			if (command.getCommand() == Command.CommandValue.POSSESSION) {
 				//Valid for the Closed state
+				setState(Command.CommandValue.POSSESSION.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.PROGRESS) {
 				//Valid for the Closed state
+				setState(Command.CommandValue.PROGRESS.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.ACCEPTED || command.getCommand() == 
@@ -420,6 +444,7 @@ public class TrackedTicket {
 		public void updateState(Command command) {
 			if (command.getCommand() == Command.CommandValue.PROGRESS) {
 				//Valid for FeedbackState
+				setState(Command.CommandValue.PROGRESS.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.ACCEPTED || command.getCommand() ==
@@ -462,6 +487,7 @@ public class TrackedTicket {
 		public void updateState(Command command) {
 			if (command.getCommand() == Command.CommandValue.ACCEPTED) {
 				//Valid for New state
+				setState(Command.CommandValue.ACCEPTED.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.CLOSED || command.getCommand() == 
@@ -504,18 +530,22 @@ public class TrackedTicket {
 		public void updateState(Command command) {
 			if (command.getCommand() == Command.CommandValue.FEEDBACK) {
 				//Valid for Working state
+				setState(Command.CommandValue.FEEDBACK.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.CLOSED) {
 				//Valid for Working state
+				setState(Command.CommandValue.CLOSED.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.ACCEPTED) {
 				//Valid for Working state
+				setState(Command.CommandValue.ACCEPTED.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.PROGRESS) {
 				//Valid for Working state
+				setState(Command.CommandValue.PROGRESS.name());
 			}
 			
 			if (command.getCommand() == Command.CommandValue.POSSESSION) {
