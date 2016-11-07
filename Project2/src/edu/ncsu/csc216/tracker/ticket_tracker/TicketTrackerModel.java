@@ -1,8 +1,6 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
 import java.util.List;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 
 import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.ticket.xml.TicketIOException;
@@ -43,6 +41,7 @@ public class TicketTrackerModel {
 	 */
 	private TicketTrackerModel() {
 		this.trackedTicketList = new TrackedTicketList();
+		singleton = this;
 	}
 	
 	/**
@@ -86,7 +85,7 @@ public class TicketTrackerModel {
 	 * This is a voided method simply used to create an entirely new ticket list.
 	 */
 	public void createNewTicketList() {
-		//TO DO: Implementation
+		this.trackedTicketList = new TrackedTicketList();
 	}
 	
 	/**
@@ -113,11 +112,20 @@ public class TicketTrackerModel {
 	 * @return Object[][] a 2-D array of ticket objects, specific to an owner
 	 */
 	public Object[][] getTicketListByOwnerAsArray(String owner) { 
-		//TO DO: Implementation
 		if (owner == null) {
 			throw new IllegalArgumentException();
 		}
-		return null;
+		Object[][] ownArr = new Object[this.trackedTicketList.getTrackedTickets().size()][3];
+		int j = 0;
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getOwner().equals(owner)) {
+				ownArr[j][0] = this.trackedTicketList.getTrackedTickets().get(i).getTicketId(); //Integer array of IDs
+				ownArr[j][1] = this.trackedTicketList.getTrackedTickets().get(i).getStateName(); //String array of state names
+				ownArr[j][2] = this.trackedTicketList.getTrackedTickets().get(i).getTitle(); //String array of titles
+				j++;
+			}
+		}
+		return ownArr;
 	}
 	
 	/**
@@ -127,11 +135,20 @@ public class TicketTrackerModel {
 	 * @return Object[][] a 2-D array of ticket objects, specific to a submitter
 	 */
 	public Object[][] getTicketListBySubmitterAsArray(String submitter) {
-		//TO DO: Implementation
 		if (submitter == null) {
 			throw new IllegalArgumentException();
 		}
-		return null; 
+		Object[][] subArr = new Object[this.trackedTicketList.getTrackedTickets().size()][3];
+		int j = 0;
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getSubmitter().equals(submitter)) {
+				subArr[j][0] = this.trackedTicketList.getTrackedTickets().get(i).getTicketId(); //Integer array of IDs
+				subArr[j][1] = this.trackedTicketList.getTrackedTickets().get(i).getStateName(); //String array of state names
+				subArr[j][2] = this.trackedTicketList.getTrackedTickets().get(i).getTitle(); //String array of titles
+				j++;
+			}
+		}
+		return subArr;
 	}
 	
 	/**
@@ -140,7 +157,6 @@ public class TicketTrackerModel {
 	 * @return TrackedTicket the ticket corresponding to the ID number
 	 */
 	public TrackedTicket getTicketById(int idNumber) {
-		//TO DO: Implementation
 		return this.trackedTicketList.getTicketById(idNumber);
 	}
 	
@@ -151,6 +167,12 @@ public class TicketTrackerModel {
 	 */
 	public void executeCommand(int value, Command command) {
 		//TO DO: Implementation
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getTicketId() == value) {
+				//Execute command?
+				this.trackedTicketList.getTrackedTickets().get(i).update(command); 
+			}
+		}
 	} 
 	
 	/**
@@ -158,7 +180,11 @@ public class TicketTrackerModel {
 	 * @param idNumber the integer used to identify specific tickets
 	 */
 	public void deleteTicketById(int idNumber) {
-		this.listXML.remove(idNumber);
+		for (int i = 0; i < this.listXML.size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getTicketId() == idNumber) {
+				this.trackedTicketList.deleteTicketById(idNumber);
+			}
+		}
 	}
 	
 	/**

@@ -1,10 +1,8 @@
 package edu.ncsu.csc216.tracker.ticket_tracker;
 
 import java.util.List;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import edu.ncsu.csc216.ticket.*;
 import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.ticket.xml.TicketIOException;
 import edu.ncsu.csc216.ticket.xml.TicketReader;
@@ -142,6 +140,6 @@ public class TrackedTicketList {
 	 * @param idNumber the integer identification number 
 	 */
 	public void deleteTicketById(int idNumber) {
-		
+		this.getTrackedTickets().remove(getTicketById(idNumber));
 	}
 }
