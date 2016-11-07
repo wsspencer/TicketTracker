@@ -72,7 +72,6 @@ public class TrackedTicket {
 	 */
 	public static final String FEEDBACK_NAME = "Feedback";
 	
-	
 	/**
 	 * This is an instance constant for the closed name
 	 */
@@ -229,6 +228,9 @@ public class TrackedTicket {
 	 * @param flag the String name of the flag
 	 */
 	private void setFlag(String flag) {
+		if (flag == null) {
+			this.flag = null;
+		}
 		if (flag.equals(Command.Flag.DUPLICATE)) {
 			this.flag = Command.Flag.DUPLICATE;
 		}
@@ -298,7 +300,7 @@ public class TrackedTicket {
 		//TO DO: figure out where NoteList comes into play
 		Ticket xmlTick = new Ticket();
 		xmlTick.setId(this.ticketId);
-		xmlTick.setState(this.state.getStateName());
+		xmlTick.setState(this.state.getStateName()); 
 		xmlTick.setTitle(this.title);
 		xmlTick.setSubmitter(this.submitter);
 		xmlTick.setOwner(this.owner);

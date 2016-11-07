@@ -97,7 +97,7 @@ public class TicketTrackerModel {
 	public Object[][] getTicketListAsArray() {
 		Object[][] temp = new String[listXML.size()][3];
 		//builds array of arrays
-		for (int i = 0; i < listXML.size(); i++) {
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
 			temp[i][0] = listXML.get(i).getId(); //Integer array of IDs
 			temp[i][1] = listXML.get(i).getState(); //String array of state names
 			temp[i][2] = listXML.get(i).getTitle(); //String array of titles
@@ -115,7 +115,15 @@ public class TicketTrackerModel {
 		if (owner == null) {
 			throw new IllegalArgumentException();
 		}
-		Object[][] ownArr = new Object[this.trackedTicketList.getTrackedTickets().size()][3];
+		//find out how many tickets are owned by the parameterized owner (so we know how large to make the array)
+		int counter = 0;
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getOwner().equals(owner)) {
+				 counter++;
+			}
+		}
+		//build the array of only tickets that are owned by the parameterized owner
+		Object[][] ownArr = new Object[counter][3];
 		int j = 0;
 		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
 			if (this.trackedTicketList.getTrackedTickets().get(i).getOwner().equals(owner)) {
@@ -138,7 +146,15 @@ public class TicketTrackerModel {
 		if (submitter == null) {
 			throw new IllegalArgumentException();
 		}
-		Object[][] subArr = new Object[this.trackedTicketList.getTrackedTickets().size()][3];
+		//find out how many tickets are owned by the parameterized submitter (so we know how large to make the array)
+		int counter = 0;
+		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
+			if (this.trackedTicketList.getTrackedTickets().get(i).getSubmitter().equals(submitter)) {
+				 counter++;
+			}
+		}
+		//build the array of only tickets that are owned by the parameterized submitter
+		Object[][] subArr = new Object[counter][3];
 		int j = 0;
 		for (int i = 0; i < this.trackedTicketList.getTrackedTickets().size(); i++) {
 			if (this.trackedTicketList.getTrackedTickets().get(i).getSubmitter().equals(submitter)) {

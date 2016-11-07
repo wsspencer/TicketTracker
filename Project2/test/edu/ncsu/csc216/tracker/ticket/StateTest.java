@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.ticket.xml.NoteList;
 import edu.ncsu.csc216.ticket.xml.Ticket;
 import edu.ncsu.csc216.tracker.command.Command;
 /**
@@ -35,15 +36,22 @@ public class StateTest {
 	@Test
 	public void testStates() {
 		Ticket t = new Ticket();
+		NoteList value = new NoteList();
 		t.setSubmitter("Me");
 		t.setOwner("Myself");
 		t.setTitle("title");
+		t.setFlag(Command.F_DUPLICATE);
+		t.setState("Accepted");
+		t.setNoteList(value);
+		t.setId(4);
+
 		TrackedTicket tt1 = new TrackedTicket(t);
 		TrackedTicket tt2 = new TrackedTicket("title", "Me", "Myself");
 		assertEquals(1, tt2.getTicketId());
 		assertEquals("Me", t.getSubmitter());
 		assertEquals("Myself", t.getOwner());
 		assertEquals("title", t.getTitle());
+		assertEquals("Duplicate", t.getFlag());
 		
 		//To be added for later tests
 		tt1.setCounter(2);
